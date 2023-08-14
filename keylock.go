@@ -43,7 +43,7 @@ func (self *KeyLock) Unlock(key string) {
 	self.getLock(key).Unlock()
 }
 
-func (self *KeyLock) KeyLocker(key string) sync.Locker {
+func (self *KeyLock) KeyLocker(key string) *sync.Mutex {
 	return self.getLock(key)
 }
 
@@ -96,7 +96,7 @@ func (self *KeyRWLock) RUnlock(key string) {
 	self.getLock(key).RUnlock()
 }
 
-func (self *KeyRWLock) KeyLocker(key string) sync.Locker {
+func (self *KeyRWLock) KeyLocker(key string) *sync.RWMutex {
 	return self.getLock(key)
 }
 

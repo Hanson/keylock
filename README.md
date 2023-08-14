@@ -1,8 +1,18 @@
 # keylock
 Golang utility class KeyLock: lock by string key, so as to avoid giant lock
 
-## Testing
+`KeyLocker` return `*sync.Mutex` to support `TryLock`
 
-Since this utility deals with concurrency so much, it is important to run the tests with the `-race` flag:
+## Usage
 
-    $ go test -race
+```go
+kl := keylock.NewKeyLock()
+
+if !kl.KeyLocker("key").TryLock() {
+	return
+}
+
+kl.Lock(guid)
+# do something
+kl.Unlock(guid)
+```
